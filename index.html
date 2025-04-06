@@ -12,170 +12,277 @@
   <title>Frontend Mentor | Character counter</title>
 </head>
 
-<body class="h-screen overflow-y-auto w-screen light_bg" id="main_body">
-  <!-- header here -->
-  <header class="container mx-auto flex items-center justify-between py-5 px-5 md:px-0 lg:px-20">
-    <img class="h-8 md:h-full" src="./assets/images/logo-light-theme.svg" />
-    <div class="flex flex-row items-center">
-      <button id="themToggle" class="bg-gray-100 flex items-center justify-center h-10 w-10 rounded">
-        <img src="./assets/images/icon-moon.svg" />
-      </button>
-    </div>
-  </header>
-  <!-- header and textarea -->
-  <div class="container mx-auto flex flex-col space-y-10 justify-center items-center px-5 md:px-0 lg:px-20">
-    <!-- <h3 class="text-center md:w-2/4 py-10 font-bold text-preset-1m md:text-preset-1">Analyze your text in real-time.</h3> -->
-    <h3 class="text-center md:w-2/4 py-10 font-bold text-preset-1m md:text-preset-1">
-      Analyze your text in real-time.
-    </h3>
-
-    <div class="w-full flex flex-col space-y-[16px]">
-      <!-- textarea here -->
-      <textarea placeholder="Start typing here… (or paste your text)"
-        class="flex w-full hover:cursor-pointer rounded-lg text-[var(--color-neutral-700)] resize-none outline-none h-[200px] border bg-[var(--color-neutral-100)] border-[var(--color-neutral-200)] p-5 text-preset-3"></textarea>
-
-      <!-- check boxes -->
-      <div
-        class="flex md:items-center flex-col md:flex-row justify-between space-y-[12px] md:space-y-0 w-full text-[var(--color-neutral-900)] text-preset-4">
-        <div class="flex flex-col md:flex-row md:items-center space-y-[12px] md:space-y-0 md:space-x-5">
-          <div class="flex flex-row items-center space-x-2">
-            <input id="exclude_spaces" type="checkbox" class="h-5 w-5 accent-[--color-purple-400]" />
-            <label for="exclude_spaces">Exclude Spaces</label>
-          </div>
-          <div class="flex flex-row items-center space-x-2">
-            <input id="char_limit" type="checkbox" class="h-5 w-5 accent-[--color-purple-400]" />
-            <label for="char_limit">Set Character Limit</label>
-          </div>
-        </div>
-        <p>Approx. reading time: &lt; 1 minute </p>
+<body class="h-screen overflow-hidden flex w-screen light_bg" id="main_body">
+  <main class="flex-1 overflow-y-auto">
+    <!-- header here -->
+    <header class="container mx-auto flex items-center justify-between py-5 px-5 md:px-0 lg:px-20">
+      <img id="light_icon" class="h-8 md:h-full" src="./assets/images/logo-light-theme.svg" />
+      <img id="dark_icon" class="h-8 md:h-full hidden" src="./assets/images/logo-dark-theme.svg" />
+      <div class="flex flex-row items-center">
+        <button id="themeToggle" class="bg-[--color-neutral-100] flex items-center justify-center h-10 w-10 rounded">
+          <img id="moon_icon" src="./assets/images/icon-moon.svg" /> <img class="hidden" id="sun_icon"
+            src="./assets/images/icon-sun.svg" />
+        </button>
       </div>
-    </div>
-    <!-- grid for the count -->
-    <div class="flex w-full flex-col md:flex-row md:items-center space-y-[16px] md:space-y-0 md:space-x-5">
-      <div
-        class="relative flex items-center justify-center  overflow-none overflow-hidden bg-[var(--color-purple-400)] rounded-xl w-full md:w-1/3 h-[150px]">
-        <div class="flex flex-col space-y-1 flex-1 px-3 z-[2] text-[var(--color-neutral-900)]">
-          <h4 class="font-bold text-5xl text-preset-1m md:text-preset-1">278</h4>
-          <p class="text-preset-3">Total Characters</p>
-        </div>
-        <div class="absolute -right-8">
-          <img class="" src="./assets/images/pattern-character-count.svg" />
+    </header>
+    <!-- header and textarea -->
+    <div class="container mx-auto flex flex-col space-y-10 justify-center items-center px-5 md:px-0 lg:px-20">
+      <!-- <h3 class="text-center md:w-2/4 py-10 font-bold text-preset-1m md:text-preset-1">Analyze your text in real-time.</h3> -->
+      <h3 id="heroText" class="text-center md:w-2/4 py-10 font-bold text-preset-1m md:text-preset-1">
+        Analyze your text in real-time.
+      </h3>
+
+      <div class="w-full flex flex-col space-y-[16px]">
+        <!-- textarea here -->
+        <textarea id="textArea" placeholder="Start typing here… (or paste your text)"
+          class="flex w-full hover:cursor-pointer rounded-lg text-[var(--color-neutral-700)] resize-none outline-none h-[200px] border bg-[var(--color-neutral-100)] border-[var(--color-neutral-200)] p-5 text-preset-3"></textarea>
+
+        <!-- check boxes -->
+        <div
+          class="flex md:items-center flex-col md:flex-row justify-between space-y-[12px] md:space-y-0 w-full text-[var(--color-neutral-900)] text-preset-4">
+          <div class="flex flex-col md:flex-row md:items-center space-y-[12px] md:space-y-0 md:space-x-5">
+            <div class="flex flex-row items-center space-x-2">
+              <input id="exclude_spaces" type="checkbox" class="h-[16px] w-[16px] accent-[--color-purple-400]" />
+              <label for="exclude_spaces">Exclude Spaces</label>
+            </div>
+            <div class="flex flex-row items-center space-x-2">
+              <input id="char_limit" type="checkbox" class="h-[16px] w-[16px] accent-[--color-purple-400]" />
+              <label for="char_limit">Set Character Limit</label>
+            </div>
+          </div>
+          <p>Approx. reading time: &lt; 1 minute </p>
         </div>
       </div>
-      <div
-        class="relative flex items-center justify-center  overflow-none overflow-hidden bg-[var(--color-yellow-500)] rounded-xl w-full md:w-1/3 h-[150px]">
-        <div class="flex flex-col space-y-1 flex-1 px-3 z-[2] text-[var(--color-neutral-900)]">
-          <h4 class="font-bold text-5xl text-preset-1m md:text-preset-1">39</h4>
-          <p class="text-preset-3">Word count</p>
+      <!-- grid for the count -->
+      <div class="flex w-full flex-col md:flex-row md:items-center space-y-[16px] md:space-y-0 md:space-x-5">
+        <div
+          class="relative flex items-center justify-center  overflow-none overflow-hidden bg-[var(--color-purple-400)] rounded-xl w-full md:w-1/3 h-[150px]">
+          <div class="flex flex-col space-y-1 flex-1 px-3 z-[2] text-[var(--color-neutral-900)]">
+            <h4 class="font-bold text-5xl text-preset-1m md:text-preset-1">278</h4>
+            <h6 class="text-preset-3">Total Characters</h6>
+          </div>
+          <div class="absolute -right-8">
+            <img class="" src="./assets/images/pattern-character-count.svg" />
+          </div>
         </div>
-        <div class="absolute -right-8">
-          <img src="./assets/images/pattern-word-count.svg" />
+        <div
+          class="relative flex items-center justify-center  overflow-none overflow-hidden bg-[var(--color-yellow-500)] rounded-xl w-full md:w-1/3 h-[150px]">
+          <div class="flex flex-col space-y-1 flex-1 px-3 z-[2] text-[var(--color-neutral-900)]">
+            <h4 class="font-bold text-5xl text-preset-1m md:text-preset-1">39</h4>
+            <h6 class="text-preset-3">Word count</h6>
+          </div>
+          <div class="absolute -right-8">
+            <img src="./assets/images/pattern-word-count.svg" />
+          </div>
+        </div>
+        <div
+          class="relative flex items-center justify-center  overflow-none overflow-hidden bg-[var(--color-orange-500)] rounded-xl w-full md:w-1/3 h-[150px]">
+          <div class="flex flex-col space-y-1 flex-1 px-3 z-[2] text-[var(--color-neutral-900)]">
+            <h4 class="font-bold text-5xl text-preset-1m md:text-preset-1">04</h4>
+            <h6 class="text-preset-3">Sentence count</h6>
+          </div>
+          <div class="absolute -right-8">
+            <img src="./assets/images/pattern-sentence-count.svg" />
+          </div>
         </div>
       </div>
-      <div
-        class="relative flex items-center justify-center  overflow-none overflow-hidden bg-[var(--color-orange-500)] rounded-xl w-full md:w-1/3 h-[150px]">
-        <div class="flex flex-col space-y-1 flex-1 px-3 z-[2] text-[var(--color-neutral-900)]">
-          <h4 class="font-bold text-5xl text-preset-1m md:text-preset-1">04</h4>
-          <p class="text-preset-3">Sentence count</p>
-        </div>
-        <div class="absolute -right-8">
-          <img src="./assets/images/pattern-sentence-count.svg" />
-        </div>
+
+      <!-- letter density here -->
+      <div class="w-full flex flex-col space-y-5">
+        <h5 id="letterDensityTitle" class="text-[var(--color-neutral-900)] text-preset-2">Letter Density</h5>
+        <ul class="w-full flex flex-col space-y-2">
+          <li class="flex flex-row items-center space-x-5">
+
+            <div class='w-6'>
+              <p class='uppercase text-preset-4 text-[var(--color-neutral-900)]'>E</p>
+            </div>
+
+            <div class="flex-1 h-[12px] rounded-xl overflow-hidden bg-[var(--color-neutral-100)]">
+              <div style="width: 16.06%" class="h-full bg-[var(--color-purple-400)] rounded-xl"></div>
+            </div>
+            <div class="flex flex-row items-center space-x-1">
+              <p>40</p>
+              <p>(16.06%)</p>
+            </div>
+          </li>
+
+          <li class="flex flex-row items-center space-x-5">
+
+            <div class='w-6'>
+              <p class='uppercase text-preset-4 text-[var(--color-neutral-900)]'>I</p>
+            </div>
+
+            <div class="flex-1 h-[12px] rounded-xl overflow-hidden bg-[var(--color-neutral-100)]">
+              <div style="width: 11.65%" class="h-full bg-[var(--color-purple-400)] rounded-xl"></div>
+            </div>
+            <div class="flex flex-row items-center space-x-1">
+              <p>29</p>
+              <p>(11.65%)</p>
+            </div>
+          </li>
+
+          <li class="flex flex-row items-center space-x-5">
+
+            <div class='w-6'>
+              <p class='uppercase text-preset-4 text-[var(--color-neutral-900)]'>T</p>
+            </div>
+
+            <div class="flex-1 h-[12px] rounded-xl overflow-hidden bg-[var(--color-neutral-100)]">
+              <div style="width: 11.24%" class="h-full bg-[var(--color-purple-400)] rounded-xl"></div>
+            </div>
+            <div class="flex flex-row items-center space-x-1">
+              <p>28</p>
+              <p>(11.24%)</p>
+            </div>
+          </li>
+
+          <li class="flex flex-row items-center space-x-5">
+
+            <div class='w-6'>
+              <p class='uppercase text-preset-4 text-[var(--color-neutral-900)]'>O</p>
+            </div>
+
+            <div class="flex-1 h-[12px] rounded-xl overflow-hidden bg-[var(--color-neutral-100)]">
+              <div style="width: 8.84%" class="h-full bg-[var(--color-purple-400)] rounded-xl"></div>
+            </div>
+            <div class="flex flex-row items-center space-x-1">
+              <p>22</p>
+              <p>(8.84%)</p>
+            </div>
+          </li>
+
+          <li class="flex flex-row items-center space-x-5">
+
+            <div class='w-6'>
+              <p class='uppercase text-preset-4 text-[var(--color-neutral-900)]'>N</p>
+            </div>
+
+            <div class="flex-1 h-[12px] rounded-xl overflow-hidden bg-[var(--color-neutral-100)]">
+              <div style="width: 8.43%" class="h-full bg-[var(--color-purple-400)] rounded-xl"></div>
+            </div>
+            <div class="flex flex-row items-center space-x-1">
+              <p>21</p>
+              <p>(8.43%)</p>
+            </div>
+          </li>
+        </ul>
+
+        <button id="showMoreButton" class="text-black flex flex-row items-center space-x-2 cursor-pointer ">
+          <span class="font-light  text-preset-3">See more</span>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.2}
+            stroke="currentColor" class="size-4">
+            <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+          </svg>
+        </button>
+
       </div>
     </div>
 
-    <!-- letter density here -->
-    <div class="w-full flex flex-col space-y-5">
-      <h5 class="text-[var(--color-neutral-900)] text-preset-2">Letter Density</h5>
-      <ul class="w-full flex flex-col space-y-2">
-        <li class="flex flex-row items-center space-x-5">
-
-          <div class='w-6'>
-            <p class='uppercase text-preset-4 text-[var(--color-neutral-900)]'>E</p>
-          </div>
-
-          <div class="flex-1 h-[12px] rounded-xl overflow-hidden bg-[var(--color-neutral-100)]">
-            <div style="width: 16.06%" class="h-full bg-[var(--color-purple-400)] rounded-xl"></div>
-          </div>
-          <div class="flex flex-row items-center space-x-1">
-            <p>40</p>
-            <p>(16.06%)</p>
-          </div>
-        </li>
-
-        <li class="flex flex-row items-center space-x-5">
-
-          <div class='w-6'>
-            <p class='uppercase text-preset-4 text-[var(--color-neutral-900)]'>I</p>
-          </div>
-
-          <div class="flex-1 h-[12px] rounded-xl overflow-hidden bg-[var(--color-neutral-100)]">
-            <div style="width: 11.65%" class="h-full bg-[var(--color-purple-400)] rounded-xl"></div>
-          </div>
-          <div class="flex flex-row items-center space-x-1">
-            <p>29</p>
-            <p>(11.65%)</p>
-          </div>
-        </li>
-
-        <li class="flex flex-row items-center space-x-5">
-
-          <div class='w-6'>
-            <p class='uppercase text-preset-4 text-[var(--color-neutral-900)]'>T</p>
-          </div>
-
-          <div class="flex-1 h-[12px] rounded-xl overflow-hidden bg-[var(--color-neutral-100)]">
-            <div style="width: 11.24%" class="h-full bg-[var(--color-purple-400)] rounded-xl"></div>
-          </div>
-          <div class="flex flex-row items-center space-x-1">
-            <p>28</p>
-            <p>(11.24%)</p>
-          </div>
-        </li>
-
-        <li class="flex flex-row items-center space-x-5">
-
-          <div class='w-6'>
-            <p class='uppercase text-preset-4 text-[var(--color-neutral-900)]'>O</p>
-          </div>
-
-          <div class="flex-1 h-[12px] rounded-xl overflow-hidden bg-[var(--color-neutral-100)]">
-            <div style="width: 8.84%" class="h-full bg-[var(--color-purple-400)] rounded-xl"></div>
-          </div>
-          <div class="flex flex-row items-center space-x-1">
-            <p>22</p>
-            <p>(8.84%)</p>
-          </div>
-        </li>
-
-        <li class="flex flex-row items-center space-x-5">
-
-          <div class='w-6'>
-            <p class='uppercase text-preset-4 text-[var(--color-neutral-900)]'>N</p>
-          </div>
-
-          <div class="flex-1 h-[12px] rounded-xl overflow-hidden bg-[var(--color-neutral-100)]">
-            <div style="width: 8.43%" class="h-full bg-[var(--color-purple-400)] rounded-xl"></div>
-          </div>
-          <div class="flex flex-row items-center space-x-1">
-            <p>21</p>
-            <p>(8.43%)</p>
-          </div>
-        </li>
-      </ul>
-
-      <button class="text-black flex flex-row items-center space-x-2 cursor-pointer ">
-        <span class="font-light text-black text-preset-3">See more</span>
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.2} stroke="currentColor"
-          class="size-4">
-          <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-        </svg>
-      </button>
-
-    </div>
-  </div>
-
+  </main>
   <script>
+    let theme = "light";
+    const moonIconRef = document.getElementById("moon_icon");
+    const sunIconref = document.getElementById("sun_icon");
+    const themeToggleButton = document.getElementById("themeToggle");
+    const bodyRef = document.getElementById("main_body");
+
+    const lightIconRef = document.getElementById("light_icon");
+    const darkIconRef = document.getElementById("dark_icon");
+
+    const heroTextRef = document.getElementById("heroText");
+    const textAreaRef = document.getElementById("textArea");
+
+    const allParagraphTextRef = document.getElementsByTagName("p")
+    const allInputLabelRef = document.getElementsByTagName("label")
+
+    const letterDensityTitleRef = document.getElementById("letterDensityTitle")
+    const showMoreButtonRef = document.getElementById("showMoreButton")
+
+    themeToggleButton.addEventListener("click", () => {
+
+      sunIconref.classList.toggle("hidden");
+      moonIconRef.classList.toggle("hidden");
+
+      if (theme === "light") {
+        theme = "dark";
+        bodyRef.classList.remove('light_bg');
+        bodyRef.classList.add('dark_bg');
+
+        themeToggleButton.classList.add("bg-[var(--color-neutral-700)]")
+        themeToggleButton.classList.remove("bg-[var(--color-neutral-100)]")
+
+        lightIconRef.classList.toggle("hidden");
+        darkIconRef.classList.toggle("hidden");
+
+        heroTextRef.classList.add("text-[var(--color-neutral-100)]")
+        heroTextRef.classList.remove("text-[var(--color-neutral-900)]")
+
+        for (let p of allParagraphTextRef) {
+          p.classList.add("text-[var(--color-neutral-100)]");
+          p.classList.remove("text-[var(--color-neutral-900)]");
+        }
+
+        for (let l of allInputLabelRef) {
+          l.classList.add("text-[var(--color-neutral-100)]");
+          l.classList.remove("text-[var(--color-neutral-900)]");
+        }
+
+        textAreaRef.classList.add("bg-[var(--color-neutral-700)]")
+        textAreaRef.classList.remove("bg-[var(--color-neutral-100)]")
+
+        textAreaRef.classList.add("text-[var(--color-neutral-200)]")
+        textAreaRef.classList.remove("text-[var(--color-neutral-700)]")
+
+        textAreaRef.classList.remove("border-[var(--color-neutral-200)]")
+        textAreaRef.classList.add("border-[var(--color-neutral-700)]")
+
+        letterDensityTitleRef.classList.add("text-[var(--color-neutral-100)]")
+        letterDensityTitleRef.classList.remove("text-[var(--color-neutral-900)]")
+
+        showMoreButtonRef.classList.add("text-[var(--color-neutral-100)]")
+        showMoreButtonRef.classList.remove("text-[var(--color-neutral-900)]")
+
+      } else {
+        theme = "light";
+        bodyRef.classList.add('light_bg');
+        bodyRef.classList.remove('dark_bg');
+
+        themeToggleButton.classList.remove("bg-[var(--color-neutral-700)]")
+        themeToggleButton.classList.add("bg-[var(--color-neutral-100)]")
+
+        lightIconRef.classList.toggle("hidden");
+        darkIconRef.classList.toggle("hidden");
+
+        heroTextRef.classList.remove("text-[var(--color-neutral-100)]")
+        heroTextRef.classList.add("text-[var(--color-neutral-900)]")
+
+        for (let p of allParagraphTextRef) {
+          p.classList.remove("text-[var(--color-neutral-100)]")
+          p.classList.add("text-[var(--color-neutral-900)]")
+        }
+        for (let l of allInputLabelRef) {
+          l.classList.remove("text-[var(--color-neutral-100)]")
+          l.classList.add("text-[var(--color-neutral-900)]")
+        }
+
+        textAreaRef.classList.add("bg-[var(--color-neutral-100)]")
+        textAreaRef.classList.remove("bg-[var(--color-neutral-700)]")
+
+        textAreaRef.classList.remove("text-[var(--color-neutral-200)]")
+        textAreaRef.classList.add("text-[var(--color-neutral-700)]")
+
+        textAreaRef.classList.add("border-[var(--color-neutral-200)]")
+        textAreaRef.classList.remove("border-[var(--color-neutral-700)]")
+
+
+        letterDensityTitleRef.classList.remove("text-[var(--color-neutral-100)]")
+        letterDensityTitleRef.classList.add("text-[var(--color-neutral-900)]")
+
+        showMoreButtonRef.classList.remove("text-[var(--color-neutral-100)]")
+        showMoreButtonRef.classList.add("text-[var(--color-neutral-900)]")
+      }
+    });
+
 
   </script>
 </body>
