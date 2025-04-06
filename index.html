@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="./assets/css/index.css">
+  <title>Frontend Mentor | Character counter</title>
+</head>
+
+<body class="h-screen overflow-y-auto w-screen light_bg" id="main_body">
+  <!-- header here -->
+  <header class="container mx-auto flex items-center justify-between py-5 px-5 md:px-0 lg:px-20">
+    <img class="h-8 md:h-full" src="./assets/images/logo-light-theme.svg" />
+    <div class="flex flex-row items-center">
+      <button id="themToggle" class="bg-gray-100 flex items-center justify-center h-10 w-10 rounded">
+        <img src="./assets/images/icon-moon.svg" />
+      </button>
+    </div>
+  </header>
+  <!-- header and textarea -->
+  <div class="container mx-auto flex flex-col space-y-10 justify-center items-center px-5 md:px-0 lg:px-20">
+    <!-- <h3 class="text-center md:w-2/4 py-10 font-bold text-preset-1m md:text-preset-1">Analyze your text in real-time.</h3> -->
+    <h3 class="text-center md:w-2/4 py-10 font-bold text-preset-1m md:text-preset-1">
+      Analyze your text in real-time.
+    </h3>
+
+    <div class="w-full flex flex-col space-y-[16px]">
+      <!-- textarea here -->
+      <textarea placeholder="Start typing here… (or paste your text)"
+        class="flex w-full hover:cursor-pointer rounded-lg text-[var(--color-neutral-700)] resize-none outline-none h-[20vh] border bg-[var(--color-neutral-100)] border-[var(--color-neutral-200)] p-5 text-preset-3"></textarea>
+
+      <!-- check boxes -->
+      <div
+        class="flex md:items-center flex-col md:flex-row justify-between space-y-[12px] md:space-y-0 w-full text-[var(--color-neutral-900)] text-preset-4">
+        <div class="flex flex-col md:flex-row md:items-center space-y-[12px] md:space-y-0 md:space-x-5">
+          <div class="flex flex-row items-center space-x-2">
+            <input
+  id="exclude_spaces"
+  type="checkbox"
+  class="h-5 w-5 accent-[--color-purple-400]"
+/>
+            <label for="exclude_spaces">Exclude Spaces</label>
+          </div>
+          <div class="flex flex-row items-center space-x-2">
+            <input id="char_limit" type="checkbox"   class="h-5 w-5 accent-[--color-purple-400]"/>
+            <label for="char_limit">Set Character Limit</label>
+          </div>
+        </div>
+        <p>Approx. reading time: &lt; 1 minute </p>
+      </div>
+    </div>
+    <!-- grid for the count -->
+    <div class="flex w-full flex-col md:flex-row md:items-center space-y-[16px] md:space-y-0 md:space-x-5">
+      <div
+        class="relative flex items-center justify-center  overflow-none overflow-hidden bg-[var(--color-purple-400)] rounded-xl w-full md:w-1/3 h-36">
+        <div class="flex flex-col space-y-1 flex-1 px-3 z-[2] text-[var(--color-neutral-900)]">
+          <h4 class="font-bold text-5xl text-preset-1m md:text-preset-1">278</h4>
+          <p class="text-preset-3">Total Characters</p>
+        </div>
+        <div class="absolute -right-8">
+          <img class="" src="./assets/images/pattern-character-count.svg" />
+        </div>
+      </div>
+      <div
+        class="relative flex items-center justify-center  overflow-none overflow-hidden bg-[var(--color-yellow-500)] rounded-xl w-full md:w-1/3 h-36">
+        <div class="flex flex-col space-y-1 flex-1 px-3 z-[2] text-[var(--color-neutral-900)]">
+          <h4 class="font-bold text-5xl text-preset-1m md:text-preset-1">39</h4>
+          <p class="text-preset-3">Word count</p>
+        </div>
+        <div class="absolute -right-8">
+          <img src="./assets/images/pattern-word-count.svg" />
+        </div>
+      </div>
+      <div
+        class="relative flex items-center justify-center  overflow-none overflow-hidden bg-[var(--color-orange-500)] rounded-xl w-full md:w-1/3 h-36">
+        <div class="flex flex-col space-y-1 flex-1 px-3 z-[2] text-[var(--color-neutral-900)]">
+          <h4 class="font-bold text-5xl text-preset-1m md:text-preset-1">04</h4>
+          <p class="text-preset-3">Sentence count</p>
+        </div>
+        <div class="absolute -right-8">
+          <img src="./assets/images/pattern-sentence-count.svg" />
+        </div>
+      </div>
+    </div>
+
+    <!-- letter density here -->
+    <div class="w-full flex flex-col space-y-5">
+      <h5 class="text-[var(--color-neutral-900)] text-preset-2">Letter Density</h5>
+      <ul class="w-full flex flex-col space-y-2">
+        <li class="flex flex-row items-center space-x-5">
+
+          <div class='w-6'>
+            <p class='uppercase text-preset-4 text-[var(--color-neutral-900)]'>E</p>
+          </div>
+
+          <div class="flex-1 rounded-xl overflow-hidden bg-[var(--color-neutral-100)]">
+            <div style="width: 16.06%" class="p-2 bg-[var(--color-purple-400)] rounded-xl"></div>
+          </div>
+          <div class="flex flex-row items-center space-x-1">
+            <p>40</p>
+            <p>(16.06%)</p>
+          </div>
+        </li>
+
+        <li class="flex flex-row items-center space-x-5">
+
+          <div class='w-6'>
+            <p class='uppercase text-preset-4 text-[var(--color-neutral-900)]'>I</p>
+          </div>
+
+          <div class="flex-1 rounded-xl overflow-hidden bg-[var(--color-neutral-100)]">
+            <div style="width: 11.65%" class="p-2 bg-[var(--color-purple-400)] rounded-xl"></div>
+          </div>
+          <div class="flex flex-row items-center space-x-1">
+            <p>29</p>
+            <p>(11.65%)</p>
+          </div>
+        </li>
+
+        <li class="flex flex-row items-center space-x-5">
+
+          <div class='w-6'>
+            <p class='uppercase text-preset-4 text-[var(--color-neutral-900)]'>T</p>
+          </div>
+
+          <div class="flex-1 rounded-xl overflow-hidden bg-[var(--color-neutral-100)]">
+            <div style="width: 11.24%" class="p-2 bg-[var(--color-purple-400)] rounded-xl"></div>
+          </div>
+          <div class="flex flex-row items-center space-x-1">
+            <p>28</p>
+            <p>(11.24%)</p>
+          </div>
+        </li>
+
+        <li class="flex flex-row items-center space-x-5">
+
+          <div class='w-6'>
+            <p class='uppercase text-preset-4 text-[var(--color-neutral-900)]'>O</p>
+          </div>
+
+          <div class="flex-1 rounded-xl overflow-hidden bg-[var(--color-neutral-100)]">
+            <div style="width: 8.84%" class="p-2 bg-[var(--color-purple-400)] rounded-xl"></div>
+          </div>
+          <div class="flex flex-row items-center space-x-1">
+            <p>22</p>
+            <p>(8.84%)</p>
+          </div>
+        </li>
+
+        <li class="flex flex-row items-center space-x-5">
+
+          <div class='w-6'>
+            <p class='uppercase text-preset-4 text-[var(--color-neutral-900)]'>N</p>
+          </div>
+
+          <div class="flex-1 rounded-xl overflow-hidden bg-[var(--color-neutral-100)]">
+            <div style="width: 8.43%" class="p-2 bg-[var(--color-purple-400)] rounded-xl"></div>
+          </div>
+          <div class="flex flex-row items-center space-x-1">
+            <p>21</p>
+            <p>(8.43%)</p>
+          </div>
+        </li>
+      </ul>
+
+      <button class="text-black flex flex-row items-center space-x-2 cursor-pointer ">
+        <span class="font-light text-black text-preset-3">See more</span>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.2} stroke="currentColor"
+          class="size-4">
+          <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+        </svg>
+      </button>
+
+    </div>
+  </div>
+
+<script>
+
+</script>
+</body>
+
+</html>
