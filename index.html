@@ -97,7 +97,7 @@
               <p class='uppercase text-preset-4 text-[var(--color-neutral-900)]'>E</p>
             </div>
 
-            <div class="flex-1 h-[12px] rounded-xl overflow-hidden bg-[var(--color-neutral-100)]">
+            <div class="flex-1 h-[12px] rounded-xl overflow-hidden bg-[var(--color-neutral-100)] progress">
               <div style="width: 16.06%" class="h-full bg-[var(--color-purple-400)] rounded-xl"></div>
             </div>
             <div class="flex flex-row items-center space-x-1">
@@ -112,7 +112,7 @@
               <p class='uppercase text-preset-4 text-[var(--color-neutral-900)]'>I</p>
             </div>
 
-            <div class="flex-1 h-[12px] rounded-xl overflow-hidden bg-[var(--color-neutral-100)]">
+            <div class="flex-1 h-[12px] rounded-xl overflow-hidden bg-[var(--color-neutral-100)] progress">
               <div style="width: 11.65%" class="h-full bg-[var(--color-purple-400)] rounded-xl"></div>
             </div>
             <div class="flex flex-row items-center space-x-1">
@@ -127,7 +127,7 @@
               <p class='uppercase text-preset-4 text-[var(--color-neutral-900)]'>T</p>
             </div>
 
-            <div class="flex-1 h-[12px] rounded-xl overflow-hidden bg-[var(--color-neutral-100)]">
+            <div class="flex-1 h-[12px] rounded-xl overflow-hidden bg-[var(--color-neutral-100)] progress">
               <div style="width: 11.24%" class="h-full bg-[var(--color-purple-400)] rounded-xl"></div>
             </div>
             <div class="flex flex-row items-center space-x-1">
@@ -142,7 +142,7 @@
               <p class='uppercase text-preset-4 text-[var(--color-neutral-900)]'>O</p>
             </div>
 
-            <div class="flex-1 h-[12px] rounded-xl overflow-hidden bg-[var(--color-neutral-100)]">
+            <div class="flex-1 h-[12px] rounded-xl overflow-hidden bg-[var(--color-neutral-100)] progress">
               <div style="width: 8.84%" class="h-full bg-[var(--color-purple-400)] rounded-xl"></div>
             </div>
             <div class="flex flex-row items-center space-x-1">
@@ -157,7 +157,7 @@
               <p class='uppercase text-preset-4 text-[var(--color-neutral-900)]'>N</p>
             </div>
 
-            <div class="flex-1 h-[12px] rounded-xl overflow-hidden bg-[var(--color-neutral-100)]">
+            <div class="flex-1 h-[12px] rounded-xl overflow-hidden bg-[var(--color-neutral-100)] progress">
               <div style="width: 8.43%" class="h-full bg-[var(--color-purple-400)] rounded-xl"></div>
             </div>
             <div class="flex flex-row items-center space-x-1">
@@ -198,6 +198,8 @@
     const letterDensityTitleRef = document.getElementById("letterDensityTitle")
     const showMoreButtonRef = document.getElementById("showMoreButton")
 
+    const progressBarRef = document.getElementsByClassName("progress")
+
     themeToggleButton.addEventListener("click", () => {
 
       sunIconref.classList.toggle("hidden");
@@ -225,6 +227,11 @@
         for (let l of allInputLabelRef) {
           l.classList.add("text-[var(--color-neutral-100)]");
           l.classList.remove("text-[var(--color-neutral-900)]");
+        }
+
+        for (let pbar of progressBarRef) {
+          pbar.classList.add("bg-[var(--color-neutral-800)]");
+          pbar.classList.remove("bg-[var(--color-neutral-100)]");
         }
 
         textAreaRef.classList.add("bg-[var(--color-neutral-700)]")
@@ -263,6 +270,11 @@
         for (let l of allInputLabelRef) {
           l.classList.remove("text-[var(--color-neutral-100)]")
           l.classList.add("text-[var(--color-neutral-900)]")
+        }
+
+        for (let pbar of progressBarRef) {
+          pbar.classList.add("bg-[var(--color-neutral-100)]");
+          pbar.classList.remove("bg-[var(--color-neutral-800)]");
         }
 
         textAreaRef.classList.add("bg-[var(--color-neutral-100)]")
