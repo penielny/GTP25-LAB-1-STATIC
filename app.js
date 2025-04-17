@@ -1,7 +1,8 @@
 /* Declearation of Refs */
 const excludeSpaceToggle = document.getElementById('exclude_spaces')
 const setCharacterLimitToggle = document.getElementById('char_limit')
-// const characterLimitInput = document.getElementById()
+const characterLimitInput = document.getElementById('set-limit-input')
+const characterLimitInputContainer = document.getElementById('set-limit-input-container')
 
 const totalCharacterCountRef = document.getElementById('total_char_count')
 const totalWordCountRef = document.getElementById('total_word_count')
@@ -16,6 +17,8 @@ const noCharPlaceholderRef = document.getElementById('no_char_placeholder')
 let isExcludeSpace = false;
 let showMoreButton = false;
 let isLimitState = false;
+let limitValue = 0;
+let textAreaFocus = false;
 /* listeners & Implimentations */
 
 excludeSpaceToggle.addEventListener("change", (e) => {
@@ -26,6 +29,11 @@ excludeSpaceToggle.addEventListener("change", (e) => {
 
 textAreaRef.addEventListener("input", (e) => {
     let textValue = e.target.value
+    if (isLimitState && e.target.value.length >= limitValue) {
+        e.target.value = e.target.value.slice(0, limitValue);
+        textValue = e.target.value
+    }
+    console.log(textValue , textValue.length)
     updatePageValues(textValue)
 })
 
@@ -34,11 +42,66 @@ showMoreButtonRef.addEventListener("click", (e) => {
     updatePageValues(textAreaRef.value)
 })
 
+setCharacterLimitToggle.addEventListener('click', (e) => {
+    isLimitState = Boolean(e.target.checked)
+    updateSetLimitInputUi(textAreaRef.value)
+    // updatePageValues(textAreaRef.value)
+})
+
+characterLimitInput.addEventListener('input', (e) => {
+    limitValue = parseInt(e.target.value, 10)
+})
+
+
+textAreaRef.addEventListener("focus", () => {
+    textAreaFocus = true
+    updateTextAreaUiState(textAreaRef.value)
+
+});
+
+textAreaRef.addEventListener("blur", () => {
+    textAreaFocus = false
+    updateTextAreaUiState(textAreaRef.value)
+});
+
 
 
 /* logic functions */
 
+function updateTextAreaUiState(text) {
+
+    const hasReachedLimit = isLimitState && text.length >= limitValue;
+
+    if (textAreaFocus) {
+        textAreaRef.style.boxShadow = hasReachedLimit
+            ? "0 0 4px 1px #DA3701"  
+            : "0 0 4px 1px #C27CF8"; 
+    } else {
+        textAreaRef.style.boxShadow = hasReachedLimit
+            ? "0 0 4px 1px #DA3701"
+            : "none"; 
+    }
+}
+
+
+
+function updateSetLimitInputUi() {
+
+    if (isLimitState) {
+        if (characterLimitInputContainer.classList.contains('hidden')) {
+            characterLimitInputContainer.classList.remove('hidden')
+        }
+    } else {
+        if (!characterLimitInputContainer.classList.contains('hidden')) {
+            characterLimitInputContainer.classList.add('hidden')
+        }
+    }
+
+}
+
 function updatePageValues(text) {
+
+    updateTextAreaUiState(text)
     totalCharacterCountRef.textContent = padValue(countCharacter(text, isExcludeSpace))
     totalWordCountRef.textContent = padValue(countWord(text))
     totalSentenceCountRef.textContent = padValue(countSentence(text))
