@@ -20,20 +20,20 @@
 
 @font-face {
     font-family: "DM Sans";
-    src: url('./../fonts/DM_Sans/static/DMSans-Regular.ttf');
+    src: url('./assets/fonts/DM_Sans/static/DMSans-Regular.ttf');
     font-optical-sizing: auto;
 }
 
 @font-face {
     font-family: "DM Sans Bold";
-    src: url('./../fonts/DM_Sans/static/DMSans-Bold.ttf');
+    src: url('./assets/fonts/DM_Sans/static/DMSans-Bold.ttf');
     font-optical-sizing: auto;
     font-weight: bold;
 }
 
 @font-face {
     font-family: "DM Sans SemiBold";
-    src: url('./../fonts/DM_Sans/static/DMSans-Regular.ttf');
+    src: url('./assets/fonts/DM_Sans/static/DMSans-Regular.ttf');
     font-optical-sizing: auto;
 }
 
@@ -93,14 +93,14 @@
 }
 
 .dark_bg {
-    background-image: url('./../images/bg-dark-theme.png');
+    background-image: url('./assets/images/bg-dark-theme.png');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
 
 .light_bg {
-    background-image: url('./../images/bg-light-theme.png');
+    background-image: url('./assets/images/bg-light-theme.png');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
