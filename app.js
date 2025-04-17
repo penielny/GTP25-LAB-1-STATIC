@@ -4,6 +4,9 @@ const setCharacterLimitToggle = document.getElementById('char_limit')
 const characterLimitInput = document.getElementById('set-limit-input')
 const characterLimitInputContainer = document.getElementById('set-limit-input-container')
 
+const errorLabelContainer = document.getElementById('char_limit_error_lable_container')
+const charLimitLabel = document.getElementById('char_limit_label')
+
 const totalCharacterCountRef = document.getElementById('total_char_count')
 const totalWordCountRef = document.getElementById('total_word_count')
 const totalSentenceCountRef = document.getElementById('sentence_count')
@@ -17,8 +20,13 @@ const noCharPlaceholderRef = document.getElementById('no_char_placeholder')
 let isExcludeSpace = false;
 let showMoreButton = false;
 let isLimitState = false;
-let limitValue = 0;
+let limitValue = 10;
 let textAreaFocus = false;
+
+
+/* silently initialize an initail value for char limit to avoid 0 char limit. */
+characterLimitInput.value = limitValue
+
 /* listeners & Implimentations */
 
 excludeSpaceToggle.addEventListener("change", (e) => {
@@ -33,7 +41,6 @@ textAreaRef.addEventListener("input", (e) => {
         e.target.value = e.target.value.slice(0, limitValue);
         textValue = e.target.value
     }
-    console.log(textValue , textValue.length)
     updatePageValues(textValue)
 })
 
@@ -44,12 +51,22 @@ showMoreButtonRef.addEventListener("click", (e) => {
 
 setCharacterLimitToggle.addEventListener('click', (e) => {
     isLimitState = Boolean(e.target.checked)
+
+    if (isLimitState && textAreaRef.value.length > limitValue) {
+        textAreaRef.value = textAreaRef.value.slice(0, limitValue);
+    }
+
     updateSetLimitInputUi(textAreaRef.value)
-    // updatePageValues(textAreaRef.value)
+    updatePageValues(textAreaRef.value)
 })
 
 characterLimitInput.addEventListener('input', (e) => {
     limitValue = parseInt(e.target.value, 10)
+    if (isLimitState && textAreaRef.value.length > limitValue) {
+        textAreaRef.value = textAreaRef.value.slice(0, limitValue);
+    }
+
+    updateTextAreaUiState(textAreaRef.value);
 })
 
 
@@ -72,14 +89,26 @@ function updateTextAreaUiState(text) {
 
     const hasReachedLimit = isLimitState && text.length >= limitValue;
 
+    if (hasReachedLimit && isLimitState) {
+        if (errorLabelContainer.classList.contains('hidden')) {
+            errorLabelContainer.classList.remove('hidden')
+        }
+        charLimitLabel.textContent = limitValue
+    } else {
+        if (!errorLabelContainer.classList.contains('hidden')) {
+            errorLabelContainer.classList.add('hidden')
+        }
+    }
+
     if (textAreaFocus) {
+
         textAreaRef.style.boxShadow = hasReachedLimit
-            ? "0 0 4px 1px #DA3701"  
-            : "0 0 4px 1px #C27CF8"; 
+            ? "0 0 4px 1px #DA3701"
+            : "0 0 4px 1px #C27CF8";
     } else {
         textAreaRef.style.boxShadow = hasReachedLimit
             ? "0 0 4px 1px #DA3701"
-            : "none"; 
+            : "none";
     }
 }
 
@@ -154,10 +183,20 @@ function updatePageValues(text) {
             }
         }
     }
+
+    let _density_data = []
+
+    uniqueCharacters.forEach(char => {
+        const { total, percentage } = letterDensity(text, char)
+        _density_data.push({ total, percentage, char })
+    })
+
+    _density_data.sort((a, b) => b.total - a.total);
+
     /* list recreation/refresh */
     letterDensityContainerRef.innerHTML = ``;
-    uniqueCharacters.slice(0, showMoreButton ? uniqueCharacters.length : 6).forEach(char => {
-        const { total, percentage } = letterDensity(text, char)
+    _density_data.slice(0, showMoreButton ? _density_data.length : 6).forEach(data => {
+        const { total, percentage, char } = data
         let htmltemplate = `<li class="flex flex-row items-center space-x-5">
 
             <div class='w-6'>

@@ -13,7 +13,7 @@
 </head>
 
 <body class="h-screen overflow-hidden flex w-screen light_bg" id="main_body">
-  <main class="flex-1 overflow-y-auto">
+  <main class="flex-1 overflow-y-auto pb-[193px]">
     <!-- header here -->
     <header class="container mx-auto flex items-center justify-between py-5 px-5 md:px-0 lg:px-20">
       <img id="light_icon" class="h-8 md:h-full" src="./assets/images/logo-light-theme.svg" />
@@ -37,6 +37,11 @@
         <textarea id="textArea" placeholder="Start typing here… (or paste your text)"
           class="flex w-full hover:cursor-pointer rounded-lg text-[var(--color-neutral-700)] resize-none outline-none h-[200px] border bg-[var(--color-neutral-100)] border-[var(--color-neutral-200)] p-5 text-preset-3"></textarea>
 
+        <div id="char_limit_error_lable_container" class="flex flex-row items-center space-x-2 pb-2 hidden">
+          <img class="h-4" src="./assets/images/icon-info.svg" />
+          <p class="text-red-500 text-sm">Limit reached! Your text exceeds <span id="char_limit_label">300</span>
+            characters.</p>
+        </div>
         <!-- check boxes -->
         <div
           class="flex md:items-center flex-col md:flex-row justify-between space-y-[12px] md:space-y-0 w-full text-[var(--color-neutral-900)] text-preset-4">
@@ -121,7 +126,7 @@
           </svg>
         </button>
 
-        <p id="no_char_placeholder" class="hidden">No characters found. Start typing to see letter density.</p>
+        <p id="no_char_placeholder" class="">No characters found. Start typing to see letter density.</p>
 
       </div>
     </div>
