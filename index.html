@@ -9,23 +9,25 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="./index.css">
+  <link rel="stylesheet" href="./app.css">
   <title>Frontend Mentor | Character counter</title>
 </head>
 
 <body class="h-screen overflow-hidden flex w-screen light_bg" id="main_body">
   <main class="flex-1 overflow-y-auto pb-[193px]">
     <!-- header here -->
-    <header class="container mx-auto flex items-center justify-between py-5 px-5 md:px-0 lg:px-20">
-      <img id="light_icon" class="h-8 md:h-full" src="./assets/images/logo-light-theme.svg" />
-      <img id="dark_icon" class="h-8 md:h-full hidden" src="./assets/images/logo-dark-theme.svg" />
-      <div class="flex flex-row items-center">
-        <button id="themeToggle" class="bg-[--color-neutral-100] flex items-center justify-center h-10 w-10 rounded">
-          <img id="moon_icon" src="./assets/images/icon-moon.svg" /> <img class="hidden" id="sun_icon"
-            src="./assets/images/icon-sun.svg" />
+    <header class="custom-header">
+      <img id="light_icon" class="logo" src="./assets/images/logo-light-theme.svg" />
+      <img id="dark_icon" class="logo hidden" src="./assets/images/logo-dark-theme.svg" />
+      <div class="icon-wrapper">
+        <button id="themeToggle" class="theme-toggle">
+          <img id="moon_icon" src="./assets/images/icon-moon.svg" />
+          <img class="hidden" id="sun_icon" src="./assets/images/icon-sun.svg" />
         </button>
       </div>
     </header>
-    <!-- header and textarea -->
+    
+    <!-- hero and textarea -->
     <div class="container mx-auto flex flex-col space-y-10 justify-center items-center px-5 md:px-0 lg:px-20">
       <!-- <h3 class="text-center md:w-2/4 py-10 font-bold text-preset-1m md:text-preset-1">Analyze your text in real-time.</h3> -->
       <h3 id="heroText" class="text-center md:w-2/4 py-10 font-bold text-preset-1m md:text-preset-1">

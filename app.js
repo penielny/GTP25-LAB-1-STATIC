@@ -84,7 +84,6 @@ textAreaRef.addEventListener("blur", () => {
 
 
 /* logic functions */
-
 function updateTextAreaUiState(text) {
 
     const hasReachedLimit = isLimitState && text.length >= limitValue;
@@ -111,8 +110,6 @@ function updateTextAreaUiState(text) {
             : "none";
     }
 }
-
-
 
 function updateSetLimitInputUi() {
 
@@ -239,18 +236,15 @@ function countCharacter(text, excludeSpace) {
     return counter;
 }
 
-
 function countWord(text) {
     if (text.trim() === "") return 0;
     return text.trim().split(/\s+/).length;
 }
 
-
 function countSentence(text) {
     if (text.trim() === "") return 0;
     return text.split(/[.!?]+/).filter(sentence => sentence.trim() !== "").length;
 }
-
 
 function readingTime(text) {
     // 0.3 seconds per word
