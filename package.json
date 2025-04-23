@@ -1,0 +1,23 @@
+{
+  "name": "gtp25-lab-1-static",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/penielny/GTP25-LAB-1-STATIC.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/penielny/GTP25-LAB-1-STATIC/issues"
+  },
+  "homepage": "https://github.com/penielny/GTP25-LAB-1-STATIC#readme",
+  "description": "",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
