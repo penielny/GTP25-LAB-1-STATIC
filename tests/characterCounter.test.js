@@ -252,17 +252,17 @@ describe("Mock UI Interactions", () => {
             expect(wordCount.textContent).toBe("09")
 
         });
-        
+
     })
 
 
     describe("read time", () => {
 
-        it('it return the minutes it take to read the given text', () => {
+        it('return the minutes it take to read the given text', () => {
             const { textarea, readTime } = refs;
 
             const text = "how long will it take you to read this text if every word takes 0.3 seconds?"
-            
+
             textarea.value = text
 
             textarea.dispatchEvent(new Event("input"))
@@ -272,13 +272,27 @@ describe("Mock UI Interactions", () => {
             const expectedValue = (((countWord(textarea.textContent) * 0.3) / 60).toFixed(2) < 1.0) ? "< 1" : `${(countWord(textarea.textContent) * 0.3).toFixed(2)}`
 
             expect(readTime.textContent).toBe(expectedValue)
-                
+
 
         });
 
     })
 
     describe("Sentence count", () => {
+
+        it('returns the number of sentence found in the text', () => {
+            const { textarea, sentenceCount } = refs;
+            const text = "The quick brown fox jumps over the lazy dog. This sentence is often used to test fonts and keyboard layouts because it contains every letter in the English alphabet. However, it's not the only pangram out there. Developers and designers often use similar phrases for quick previews. Beyond that, text samples like these can be useful when testing input fields, especially in real-time applications. They help expose edge cases, such as handling whitespace or exceeding character limits. Whether you're building a blog editor, a chat app, or a tweet composer, this kind of test input is essential."
+            textarea.value = text
+
+            textarea.dispatchEvent(new Event("input"))
+
+            updateUI()
+
+            expect(sentenceCount.textContent).toEqual("07")
+
+        });
+
 
     })
 
