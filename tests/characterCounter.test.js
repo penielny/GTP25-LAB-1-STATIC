@@ -53,6 +53,12 @@ describe('Character Utility Functions', () => {
             expect(countSentence(veryLongSentence)).toBe(3)
         })
 
+        it('return zero for empty string', () => {
+            const veryLongSentence = ""
+            expect(countSentence(veryLongSentence)).toBe(0)
+        });
+        
+
     })
 
     describe("Count Words", () => {
