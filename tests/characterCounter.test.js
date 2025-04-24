@@ -35,7 +35,8 @@ describe('Character Utility Functions', () => {
 
             it('counts special characters correctly', () => {
                 expect(countCharacter('@!$&*', false)).toBe(5);
-                expect(countCharacter('()^#', false)).toBe(4);
+                // exclude space
+                expect(countCharacter('() ^#*', true)).toBe(5);
             });
 
             it('handles multiline strings', () => {
@@ -99,24 +100,45 @@ describe('Character Utility Functions', () => {
     })
 
     describe("Reading Time", () => {
-        // based on the function evry word takes 0.3 sec
-        const readableText = "When comparing objects in JavaScript, you need to consider how objects are compared. By default, JavaScript objects are reference types, so they are compared by reference, not by their actual values."
-        const timeTaken = (((countWord(readableText) * 0.3) / 60).toFixed(2) < 1.0) ? "< 1" : (countWord(readableText) * 0.3).toFixed(2)
 
         it('return time taking to read text', () => {
+            // based on the function evry word takes 0.3 sec
+            const readableText = "When comparing objects in JavaScript, you need to consider how objects are compared. By default, JavaScript objects are reference types, so they are compared by reference, not by their actual values."
+            const timeTaken = (((countWord(readableText) * 0.3) / 60).toFixed(2) < 1.0) ? "< 1" : ((countWord(readableText) * 0.3)/60).toFixed(2)
             expect(readingTime(readableText)).toBe(timeTaken)
         });
+
+        it('returns "< 1" for very short text', () => {
+            const shortText = "Hello world";
+            expect(readingTime(shortText)).toBe("< 1");
+        });
+
+        it('returns reading time over 1 minute for long text', () => {
+            const longText = "This is a sentence that will be repeated multiple times to ensure we have enough words. ".repeat(200);
+            const timeTaken = (((countWord(longText) * 0.3) / 60).toFixed(2) < 1.0) ? "< 1" : ((countWord(longText) * 0.3)/60).toFixed(2)
+            expect(readingTime(longText)).toBe(timeTaken)
+        });
+        
+        
 
     })
 
     describe("Padding Value", () => {
 
-        it('returns the padded value for a given value', () => {
-            const valueToPad = 5;
-            expect(padValue(5)).toBe("05")
+        it('returns the padded value as a string', () => {
+            expect(padValue(5)).toBe("05");
         });
-
-    })
+    
+        it('returns the padded value for a two-digit number', () => {
+            expect(padValue(15)).toBe("15");
+        });
+    
+        it('pads strings properly', () => {
+            expect(padValue("7")).toBe("07");
+        });
+    
+    });
+    
 
 })
 
@@ -301,7 +323,7 @@ describe("Mock UI Interactions", () => {
 
         it('Displays warning it length is exceeded', () => {
 
-            const { textarea, charLimit , notification } = refs;
+            const { textarea, charLimit, notification } = refs;
 
             let text = "hey i'm hoping this is more than 10 else this test will fail"
 
@@ -316,12 +338,12 @@ describe("Mock UI Interactions", () => {
             updateUI()
 
             expect(notification.textContent).toBe("you have exceed the set number of characters allowed")
-            
+
         });
 
         it('removes warning it length is not exceeded', () => {
 
-            const { textarea, charLimit , notification } = refs;
+            const { textarea, charLimit, notification } = refs;
 
             let text = "hey i'm"
 
@@ -336,9 +358,9 @@ describe("Mock UI Interactions", () => {
             updateUI()
 
             expect(notification.textContent).toBe("")
-            
+
         });
-        
+
 
     })
 
