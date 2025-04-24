@@ -297,15 +297,49 @@ describe("Mock UI Interactions", () => {
     })
 
 
-    describe("Displaying exceed character limit", () => {
+    describe("Character Limit warnning", () => {
+
+        it('Displays warning it length is exceeded', () => {
+
+            const { textarea, charLimit , notification } = refs;
+
+            let text = "hey i'm hoping this is more than 10 else this test will fail"
+
+            charLimit.value = 10
+
+            charLimit.dispatchEvent(new Event("input"))
+
+            textarea.value = text
+
+            textarea.dispatchEvent(new Event("input"))
+
+            updateUI()
+
+            expect(notification.textContent).toBe("you have exceed the set number of characters allowed")
+            
+        });
+
+        it('removes warning it length is not exceeded', () => {
+
+            const { textarea, charLimit , notification } = refs;
+
+            let text = "hey i'm"
+
+            charLimit.value = 10
+
+            charLimit.dispatchEvent(new Event("input"))
+
+            textarea.value = text
+
+            textarea.dispatchEvent(new Event("input"))
+
+            updateUI()
+
+            expect(notification.textContent).toBe("")
+            
+        });
+        
 
     })
-
-    describe("clear warining when limit not exceeded", () => {
-
-    })
-
-
-
 
 })
