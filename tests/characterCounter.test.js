@@ -93,13 +93,18 @@ describe('Character Utility Functions', () => {
                 expect(letterDensity(testText, "t")).toEqual(expectedValue)
 
             })
-            it('return the letter density data for character i', () => {
+
+            it('returns the letter density data for character i', () => {
 
                 const expectedValue = { percentage: 16.67, total: 3 }
                 // returns {percentage, total(frequency) }
                 expect(letterDensity(testText, "i")).toEqual(expectedValue)
 
             })
+
+            it('returns zero for empty text or empty char', () => {
+                expect(letterDensity(testText,"")).toBe(0)
+            });
         })
 
 
